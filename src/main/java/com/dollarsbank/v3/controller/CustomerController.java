@@ -39,14 +39,6 @@ public class CustomerController {
 	     return new ResponseEntity<List<Customer>>(userModels, HttpStatus.OK);
 	 }
 	
-//	@GetMapping("/customer")
-//	public ResponseEntity<?> getCustomers() {
-//	       List < Customer > employees = repo.findAll();
-//	        employees.forEach(employee -> System.out.println(employee.toString()));
-//		System.out.println("Test line.");
-//		return ResponseEntity.status(200).body(employees);
-//		
-//	}
 	
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<?> getCustomerById(@PathVariable int id) {
@@ -62,14 +54,20 @@ public class CustomerController {
 	
 	@PostMapping("/customer")
 	public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
+		Optional<Customer> found = repo.findByUsername(customer.getUsername());
 		
-		customer.setId(null);
-		customer.setRole(Customer.Role.ROLE_USER);
-		customer.setPassword(encoder.encode(customer.getPassword()));
-		
-		Customer created = repo.save(customer);
-		
-		return ResponseEntity.status(201).body(created);
+		if (found.isEmpty()) {
+			customer.setId(null);
+			customer.setRole(Customer.Role.ROLE_USER);
+			customer.setPassword(encoder.encode(customer.getPassword()));
+			
+			Customer created = repo.save(customer);
+			
+			return ResponseEntity.status(201).body(created);
+		}
+		else {
+			return ResponseEntity.status(409).body(customer.getUsername() + " already exists.");
+		}
 	}
 	
 	@PutMapping("/customer")
