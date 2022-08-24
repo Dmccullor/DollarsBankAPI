@@ -42,20 +42,11 @@ public class Savings extends Account {
 	private List<Transaction> transactions;
 	
 	public Savings() {}
-
+	
 	public Savings(Integer id, double amount) {
 		super(id, amount);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Savings(Integer id, double amount, Integer id2, double amount2, Customer customer, Checking checking,
-			List<Transaction> transactions) {
-		super(id, amount);
-		id = id2;
-		amount = amount2;
-		this.customer = customer;
-		this.checking = checking;
-		this.transactions = transactions;
+		this.id = id;
+		this.amount = amount;
 	}
 
 	public Integer getId() {
@@ -97,62 +88,10 @@ public class Savings extends Account {
 	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Savings [id=" + id + ", amount=" + amount + "]";
+	}
 	
 }
-	
-//	
-//	public Savings(Integer id, double amount) {
-//		super(id, amount);
-//		this.id = id;
-//		this.amount = amount;
-//	}
-//
-//	public Integer getId() {
-//		return id;
-//	}
-//
-//	public void setId(Integer id) {
-//		this.id = id;
-//	}
-//
-//	public double getAmount() {
-//		return amount;
-//	}
-//
-//	public void setAmount(double amount) {
-//		this.amount = amount;
-//	}
-//
-//	public Customer getCustomer() {
-//		return customer;
-//	}
-//
-//	public void setCustomer(Customer customer) {
-//		this.customer = customer;
-//	}
-//
-//	public Checking getChecking() {
-//		return checking;
-//	}
-//
-//	public void setChecking(Checking checking) {
-//		this.checking = checking;
-//	}
-//
-//	public List<Transaction> getTransactions() {
-//		return transactions;
-//	}
-//
-//	public void setTransactions(List<Transaction> transactions) {
-//		this.transactions = transactions;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Savings [id=" + id + ", amount=" + amount + "]";
-//	}
-//
-//	
-//	
-//}
