@@ -3,6 +3,7 @@ package com.dollarsbank.v3.controller;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,19 @@ public class CustomerController {
 		
 		if (found.isEmpty()) {
 			return ResponseEntity.status(404).body("Customer with ID: " + id + " was not found.");
+		}
+		else {
+			return ResponseEntity.status(200).body(found.get());
+		}
+	}
+	
+	
+	@GetMapping("/customer/username/{username}")
+	public ResponseEntity<?> getCustomerByUsername(@PathVariable String username) {
+		Optional<Customer> found = repo.findByUsername(username);
+		
+		if(found.isEmpty()) {
+			return ResponseEntity.status(404).body("Customer with username " + username + " not found.");
 		}
 		else {
 			return ResponseEntity.status(200).body(found.get());

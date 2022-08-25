@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,17 +27,17 @@ public class Checking extends Account{
 	@Column(nullable = false)
 	private double init_deposit;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "user_id")
 	@JsonIgnore
 	private Customer customer;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "savings_id")
 	@JsonIgnore
 	private Savings savings;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "checking")
+	@OneToMany(mappedBy = "checking")
 	@JsonIgnore
 	private List<Transaction> transactions;
 	
